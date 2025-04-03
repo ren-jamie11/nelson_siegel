@@ -80,13 +80,29 @@ for both methods where $n$ is the number of test samples. We can perform a 2-sam
 - Did the Nelson siegel OLS perform better than direct OLS on each of the 10 maturities? (statistical test + visual plots)
 - If so, why? If not, why?
 
-#### Residuals vs fitted values
+### Residuals vs fitted values
 
-<img src="assets/img/resid_vs_fitted_yc.png" alt="Residuals vs fitted values for each yield curve" width="500">
+![alt text](https://github.com/ren-jamie11/nelson_siegel/blob/main/assets/resid_vs_fitted_yc_train.png)
+![alt text](https://github.com/ren-jamie11/nelson_siegel/blob/main/assets/resid_vs_fitted_yc.png)
 
-#### OLS t stats (training)
+![alt text](https://github.com/ren-jamie11/nelson_siegel/blob/main/assets/resid_vs_fitted_betas_train.png)
+![alt text](https://github.com/ren-jamie11/nelson_siegel/blob/main/assets/resid_vs_fitted_betas_test.png)
 
-#### Compare 2 methods
+#### Interpretation:
+
+In general, the residual vs fitted values on training do not exhibit any particularly strong patterns, suggesting that linear regression is an appropriate rough approximation of the relationship between features and responses. Additionally, the patterns exhibited in training and test are not too different, suggesting the model did not overfit. One note:
+
+Lower maturities seem to have more outliers than higher ones. This makes sense, since the variance of short-term rate changes is higher than long-term rate changes (since long-term rates are closely related to the average of short-term rates over that period)
+
+### OLS t stats (training)
+
+![alt text](https://github.com/ren-jamie11/nelson_siegel/blob/main/assets/ols_summary.png)
+
+#### Interpretation
+
+
+
+### Compare 2 methods
 
 ### Conclusion
 
