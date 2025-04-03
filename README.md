@@ -13,17 +13,17 @@ One challenge with modeling the yield curve is that it consists of many maturiti
 
 The Nelson Siegel model parametrizes the yield curve using 3 parameters: $\beta_1$, $\beta_2$, $\beta_3$. You may think of them as the level, slope, and "twist/curvature" of the yield curve. Now, instead of having to predict over 10 maturities, we only need to predict 3 values. The hyperparameter $\lambda$ controls the curvature/shape of the parametrized curve
 
-$$y(\tau) = \beta_0 + \beta_1 \left( \frac{1 - e^{-\tau/\lambda}}{\tau/\lambda} \right) + \beta_2 \left( \frac{1 - e^{-\tau/\lambda}}{\tau/\lambda} - e^{-\tau/\lambda} \right)
+$$y(\tau) = \beta_1 + \beta_2 \left( \frac{1 - e^{-\tau/\lambda}}{\tau/\lambda} \right) + \beta_3 \left( \frac{1 - e^{-\tau/\lambda}}{\tau/\lambda} - e^{-\tau/\lambda} \right)
 $$
-
+.
 **Explanation of variables**:
 
 - $y(\tau)$: The yield (interest rate) at a given maturity $\tau$.
 - $\tau$: The time to maturity of the bond (years)
-- $\beta_0$: The long-term level of interest rates (as $\tau \to \infty$).
-- $\beta_1$: The short-term component, influencing the curve's initial level.
-- $\beta_2$: The medium-term component, controlling the hump or curvature.
-- $\lambda$: The decay factor that determines how quickly the effects of $\beta_1$ and $\beta_2$ fade over time.
+- $\beta_1$: The long-term level of interest rates (as $\tau \to \infty$).
+- $\beta_2$: The short-term component, influencing the curve's initial level.
+- $\beta_3$: The medium-term component, controlling the hump or curvature.
+- $\lambda$: The decay factor that determines how quickly the effects of $\beta_2$ and $\beta_3$ fade over time.
 
 Of course, by reducing the dimensionality of the problem, we also lose some accuracy/information on the original yield curve. We will explore if such a tradeoff is worth it.
 
