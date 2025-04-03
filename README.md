@@ -82,6 +82,8 @@ for both methods where $n$ is the number of test samples. We can perform a 2-sam
 
 #### Residuals vs fitted values
 
+<img src="assets/img/resid_vs_fitted_yc.png" alt="Residuals vs fitted values for each yield curve" width="500">
+
 #### OLS t stats (training)
 
 #### Compare 2 methods
