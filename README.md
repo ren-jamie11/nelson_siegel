@@ -15,7 +15,7 @@ The Nelson Siegel model parametrizes the yield curve using 3 parameters: $\beta_
 
 $$y(\tau) = \beta_1 + \beta_2 \left( \frac{1 - e^{-\tau/\lambda}}{\tau/\lambda} \right) + \beta_3 \left( \frac{1 - e^{-\tau/\lambda}}{\tau/\lambda} - e^{-\tau/\lambda} \right)
 $$
-.
+
 **Explanation of variables**:
 
 - $y(\tau)$: The yield (interest rate) at a given maturity $\tau$.
