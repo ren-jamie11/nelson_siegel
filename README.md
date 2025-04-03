@@ -2,7 +2,7 @@
 
 **Motivation: How would you predict a 10-dimensional object?** </br>
 
-INSERT PICTURE OF YIELD CURVE
+<img src="https://github.com/ren-jamie11/nelson_siegel/blob/main/assets/example_yc.png" alt="Alt text" width="500">
 
 One challenge with modeling the yield curve is that it consists of many maturities (1m, 3m...30y). The high dimensionality makes it somewhat cumbersome to make predictions. One may decide to select a set of features and attempt to fit a model for each of the maturities, but some issues are:
 
@@ -94,17 +94,52 @@ In general, the residual vs fitted values on training do not exhibit any particu
 
 Lower maturities seem to have more outliers than higher ones. This makes sense, since the variance of short-term rate changes is higher than long-term rate changes (since long-term rates are closely related to the average of short-term rates over that period)
 
-### OLS t stats (training)
+### OLS training stats summary
 
 ![alt text](https://github.com/ren-jamie11/nelson_siegel/blob/main/assets/ols_summary.png)
 
+*Correlation matrix* </br>
+<img src="https://github.com/ren-jamie11/nelson_siegel/blob/main/assets/corrs.png" alt="Alt text" width="300">
+
 #### Interpretation
 
+Looking at the p-values, we can conclude that there is some positive relationship between PCE (inflation)/consumer sentiment and yields. Conceptually, an increase in inflation/consumer sentiment in the previous month generally leads to rises in yields in the next month. This aligns with economic intuition, as the Fed will tend to raise rates to dampen inflation/overheated economy. Meanwhile, we do not find a statistically significant relationship between yields and unemployment (holding other variables constant). </br>
+
+Because the correlation between unemployment and the other 2 features are somewhat high, we could have chosen to remove it to have a stronger interpretation of linear regression results. But since our primary goal is prediction, we will keep it for now 
+
+Meanwhile, macro predictors seem to have meaningful explanatory power for change in level, but not change in slope and twist. This is likely because our predictors are very short-term and backward looking (1m), while the slope/twist of the yield curve requires economic forecasts 5-10 years into the future. Therefore, we would need to collect more relevant features to accurately model level/twist (such as Fed announcements, recession estimates etc). 
 
 
 ### Compare 2 methods
 
-### Conclusion
+![alt text](https://github.com/ren-jamie11/nelson_siegel/blob/main/assets/prediction_vs_true.png)
+
+**Statistical results**
+
+| Metric                          | Value   |
+|---------------------------------|---------|
+| Mean total abs error for direct OLS  | 2.197   |
+| Mean total abs error for Nelson Siegel OLS | 2.420   |
+| 2-sample t-stat                 | -0.5620 |
+| P-value                         | 0.5769  |
+
+
+#### Observations
+
+- Nelson siegel (orange) curves are generally flatter than the direct OLS predictions (less variance in shape)
+- It is not visually obvious which one has more accurate predictions
+
+Both seem to be particularly bad at predicting changes in long-term yields. This makes sense, as there is much more information that goes into long-term rates than simply looking at the 1-month change in inflation/consumer sentiment. Long-term rates consist of all available information on economic policy forecasts for the next 5-10 years. Just because inflation went up 0.6% last month doesn't mean we expect that to continue happening over the next 10 years.
+
+### Conclusion: 
+
+Overall, there was a *lack of statistical evidence to suggest there is a meaningful difference in predictive accuracy between directly performing OLS on the yield curve itself vs. its Nelson Siegel parameters*. This conclusion is made under the context of using 1-month change in inflation, consumer sentiment, and unemployment to predict next-month yield curve changes. </br>
+
+The *main weakness of the OLS on Nelson Siegel method is that the features did not have meaningful predictive power on the shape of the yield curve* - only its value. Without features that can predict the shape/structure of the yield curve, the model loses its power. In that case, we might as well perform OLS directly on the yield curve itself, since at least we get a more precise prediction of the level of each maturity (rather than a single $\beta_1$ feature representing the average level of the entire curve) 
+
+Therefore, to *capture the benefits of Nelson Siegel parametrization, we would need to find features that capture the change in steepness/curvature of the yield curve*, which necessarily requires features that capture long-term economic expectations (rather than 1m backward-looking changes). 
+
+*TLDR: Model choice cannot help you if you do not have good features!*
 
 
 
