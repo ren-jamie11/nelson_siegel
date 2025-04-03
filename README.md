@@ -99,7 +99,7 @@ Lower maturities seem to have more outliers than higher ones. This makes sense, 
 ![alt text](https://github.com/ren-jamie11/nelson_siegel/blob/main/assets/ols_summary.png)
 
 *Correlation matrix* </br>
-<img src="https://github.com/ren-jamie11/nelson_siegel/blob/main/assets/corrs.png" alt="Alt text" width="300">
+<img src="https://github.com/ren-jamie11/nelson_siegel/blob/main/assets/corrs.png" alt="Alt text" width="308">
 
 #### Interpretation
 
